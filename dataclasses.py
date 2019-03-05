@@ -4,6 +4,7 @@ import copy
 import types
 import inspect
 import keyword
+import collections
 
 __all__ = ['dataclass',
            'field',
@@ -758,7 +759,7 @@ def _process_class(cls, init, repr, eq, order, unsafe_hash, frozen):
     # an ordered dict.  I am leveraging that ordering here, because
     # derived class fields overwrite base class fields, but the order
     # is defined by the base class, which is found first.
-    fields = {}
+    fields = collections.OrderedDict()
 
     setattr(cls, _PARAMS, _DataclassParams(init, repr, eq, order,
                                            unsafe_hash, frozen))
